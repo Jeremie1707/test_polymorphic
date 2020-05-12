@@ -21,26 +21,39 @@ ActiveRecord::Schema.define(version: 2020_05_12_131208) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "imageable_type"
-    t.bigint "imageable_id"
+    t.string "accountable_type"
+    t.bigint "accountable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id"
     t.index ["email"], name: "index_accounts_on_email", unique: true
-    t.index ["imageable_type", "imageable_id"], name: "index_accounts_on_imageable_type_and_imageable_id"
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
 
   create_table "admins", force: :cascade do |t|
+    t.integer "time_in_the_company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "doctors", force: :cascade do |t|
+    t.integer "number_of_patient"
+    t.date "date_of_birth"
+    t.float "lat"
+    t.float "long"
+    t.text "bio"
+    t.string "address"
+    t.string "phone_number"
+    t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
+    t.integer "age"
+    t.string "address"
+    t.string "phone_number"
+    t.boolean "prescription_consent", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
